@@ -1,12 +1,13 @@
 # UW → Desk Pipe (Free)
 
 **Free open-source judgment framework** for Unusual Whales flow → a human desk checklist.  
-Not a signal service. Not auto-trading. Not financial advice.
+Not a signal service. Optional live place via **Robinhood Agentic** after your rules. Not financial advice.
 
 Built by [Mark Meyer](https://x.com/MarkMeyerBuilds) (@MarkMeyerBuilds).  
 
 > **What this is:** a pipe + judgment checklist so you can *differentiate* UW A/A+ noise into skip / story-only / size-and-consider.  
-> **What this is not:** Mark’s live Agentic place path, broker credentials, or his private edge tags.
+> **What this is:** UW pipe + judgment questionnaire → optional live fire on **your** Robinhood Agentic account.
+> **What this is not:** Mark’s private edge tags, day-lock ping policy, or anyone else’s broker keys.
 
 ---
 
@@ -39,7 +40,7 @@ This repo gives you the **pipe + the questions**. You bring the judgment (and yo
 | --- | --- |
 | **Unusual Whales account** | Required. Sign up via partner link: **[https://refer.unusualwhales.com/mark-meyer](https://refer.unusualwhales.com/mark-meyer)** (10% off 3 months) |
 | **UW API token** (BYO) | Stored only in your local env / secrets — never committed |
-| **Optional: Robinhood paper** | For live-quote practice only. This free cut does **not** include an auto-place path |
+| **Optional: Robinhood Agentic** | BYO account + API/connector. After checklist + live quote, you can enable live place on Agentic |
 | **Python 3.10+** | Local scripts / helpers |
 | **Brain** | Soft prefs are guidance, not FAIL religion |
 
@@ -76,7 +77,8 @@ Aligned with desk docs you’ll see named in the private playbook (`AGENTIC-DESK
 | **Trade journal** | `SIGNAL` / `ENTRY` / `COMPLETE` event log (noisy path). |
 | **Closed-trades W/L journal** | One row per closed ticket + required empty `edge_note` you fill so the desk compounds. |
 | **RTH options window** | Options wakes/places intended for weekday regular hours only (when you can actually trade options). |
-| **Alert-only mode** | Default free cut: ears + checklist + journal. **No broker auto-place** in the public package. |
+| **Live place (optional)** | After hard gates + your questionnaire, place on Robinhood Agentic (BYO). Default off until you enable it. |
+| **Alert-only vs live** | Default: ears + checklist + journal. Flip live place on when *your* rules pass and RH Agentic is wired. |
 | **Hosted / cloud judgment (paid optional)** | Always-on desk that runs the checklist for you and wakes you on fills / material marks — see waitlist below. |
 
 ---
@@ -110,7 +112,7 @@ Point survivors at **whatever cloud agent you already pay for**. That agent does
 | Judgment against the checklist | Sizing questions, reject reasons, “size or pass?” |
 | Live broker quotes (if you wire a connector) | Quote gate before any real size talk |
 | Material pings | Fills, big mark moves — not every skip |
-| Optional assisted place (your keys, your risk) | Only if *you* enable it; **not** in the free OSS cut |
+| Optional live place (your RH Agentic, your risk) | Enable after questionnaire + live quote; Mini stays ears-only |
 
 **Rule:** Cloud gets **strategy + connectors**. Local gets **always-on grind**. Don’t put “one general chat does everything” in the middle — that’s where quota burns.
 
@@ -139,7 +141,7 @@ Unusual Whales ──► Mac Mini watcher (dedupe / RTH / ears)
 | --- | --- |
 | Mark’s real closed-trades **edge tags** & pattern notes | That’s the compounding journal |
 | Day-lock / ping policy (when to wake vs stay quiet) | Ops policy, not OSS |
-| Robinhood **auto-place** credentials & live Agentic place path | Liability + secrets |
+| Mark’s RH credentials / private day-lock / filled edge journal | Secrets + compounding edge — bring your own keys |
 | Hosted desk runtime (always-on watcher → judgment → optional assisted place) | Product |
 
 Want the hosted desk? → [Hosted desk waitlist](#hosted-desk--waitlist).
@@ -217,7 +219,7 @@ python3 -m desk.checklist --help
 ```
 
 Wire UW alerts → your ingest → checklist output.  
-**You** decide skip / story / size. This free cut does not place for you.
+**You** set the questionnaire/rules. Alert-only until you wire Robinhood Agentic and flip live place on — then it can fire when rules + live quote pass. See `PLACE.md`.
 
 ---
 
@@ -264,7 +266,7 @@ One-time install: pipe + checklist wired to *your* UW + paper/live quoting pract
 - **No guarantees.** Markets risk capital. You can lose money.
 - **BYO keys / accounts.** You own Unusual Whales, broker, and cloud credentials. Never paste secrets into issues or PRs.
 - **No liability.** Authors and promoters are not responsible for trades, misses, outages, or third-party API changes.
-- **Not a broker, RIA, or CTA.** No auto-place in this free cut. Hosted / setup offerings (if any) are optional ops help — still your decisions, your risk.
+- **Not a broker, RIA, or CTA.** Live place is optional and uses **your** Robinhood Agentic credentials. You own every fill. Hosted / setup offerings (if any) are optional ops help — still your risk.
 - Past patterns in any example journal **do not** predict future results.
 
 ---

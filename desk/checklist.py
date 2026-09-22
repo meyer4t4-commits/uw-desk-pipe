@@ -35,7 +35,7 @@ def run_checklist(
     reject_tags: list[str] | None = None,
     force_skip: bool = False,
 ) -> ChecklistResult:
-    """Judgment framework — returns recommended action. Does not place trades."""
+    """Judgment framework — returns recommended action. Place is optional upstream."""
     reject_tags = list(reject_tags or [])
     soft_notes: list[str] = []
     questions = HARD_QUESTIONS + SOFT_QUESTIONS
@@ -59,9 +59,9 @@ def run_checklist(
     elif not hard_ok:
         action = "story_only"
     else:
-        action = "story_only"  # free cut never auto-recommends place
+        action = "story_only"
         soft_notes.append(
-            "Free cut is alert-only. After checklist + live quote, YOU decide size."
+            "Checklist passed soft path. Enable LIVE_PLACE + RH Agentic to fire; else journal only."
         )
 
     return ChecklistResult(

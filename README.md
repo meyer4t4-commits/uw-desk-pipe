@@ -11,6 +11,16 @@ Promoted via Grok Bot Radar as a free top-of-funnel giveaway.
 
 ---
 
+## Start here — get Unusual Whales (this is how the free repo pays)
+
+You need a UW account for the pipe. Use Mark’s partner link (easy, one click):
+
+**→ [https://refer.unusualwhales.com/mark-meyer](https://refer.unusualwhales.com/mark-meyer)**
+
+New users get **10% off for 3 months**. Mark earns partner commission when you subscribe through that link. Please use it — it’s the main way this free giveaway stays funded.
+
+---
+
 ## Why this exists
 
 UW will feed **many** graded setups every day. The feed is commodity.  
@@ -28,7 +38,7 @@ This repo gives you the **pipe + the questions**. You bring the judgment (and yo
 
 | Need | Notes |
 | --- | --- |
-| **Unusual Whales account** | Flow / alerts / API access as your plan allows. [Get UW →](#unusual-whales--affiliate) |
+| **Unusual Whales account** | Required. Sign up via partner link: **[https://refer.unusualwhales.com/mark-meyer](https://refer.unusualwhales.com/mark-meyer)** (10% off 3 months) |
 | **UW API token** (BYO) | Stored only in your local env / secrets — never committed |
 | **Optional: Robinhood paper** | For live-quote practice only. This free cut does **not** include an auto-place path |
 | **Python 3.10+** | Local scripts / helpers |

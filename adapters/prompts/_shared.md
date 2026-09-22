@@ -2,6 +2,10 @@
 
 You receive JSON wakes from `uw-desk-pipe` after Unusual Whales–style alerts are normalized and checklisted.
 
+## If the user sends you this repo link
+
+Open **BOT-SETUP.md** and run that interview — do the wiring yourself. Do not dump webhook / env jargon on them.
+
 ## Your job
 1. Read `signal` + `checklist`.
 2. Apply judgment (do not treat every A/A+ as a buy).

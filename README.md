@@ -1,6 +1,6 @@
 # UW → Desk Pipe
 
-**Free tools to turn Unusual Whales options flow into clear trade decisions.**
+**Free tools to turn Unusual Whales options flow into clear trade decisions — set up by your AI bot.**
 
 Built by [Mark Meyer](https://x.com/MarkMeyerBuilds) (@MarkMeyerBuilds).  
 Not financial advice. You can lose money trading options.
@@ -13,22 +13,18 @@ Not financial advice. You can lose money trading options.
    https://refer.unusualwhales.com/mark-meyer  
    New users: **10% off for 3 months**. Please use that link.
 
-2. **Clone and try the checklist**
+2. **Send this repo link to your AI bot** and say **“set this up for me”**  
+   Repo: https://github.com/meyer4t4-commits/uw-desk-pipe  
+   Your bot should open **[BOT-SETUP.md](BOT-SETUP.md)**, ask a few plain-language questions, wire itself, and confirm when alerts are ready.  
+   **Humans should not need webhooks, env files, or API jargon** — that’s the bot’s job.
+
+3. **Optional (humans who want to poke around)**
    ```bash
    git clone https://github.com/meyer4t4-commits/uw-desk-pipe.git
    cd uw-desk-pipe
    cp .env.example .env
    python3 scripts/run_checklist.py samples/signal.example.json --skip-dedupe
    ```
-
-3. **Plug in your agent** (one command)
-   ```bash
-   python3 scripts/wire_adapter.py grokbot --url 'https://YOUR_INBOUND_WEBHOOK'
-   # then paste adapters/ACTIVE_PROMPT.md into that bot
-   python3 scripts/notify_signal.py samples/signal.example.json --dry-run
-   ```
-
-That’s the whole onboarding path.
 
 ---
 
@@ -47,12 +43,12 @@ Most A/A+ alerts should be ignored. The edge is **which ones to skip vs take ser
 
 | Step | What happens |
 | --- | --- |
-| 1 | Normalize a UW-style alert into one `SIGNAL` |
-| 2 | Dedupe the same contract (~2 hours) |
-| 3 | Run a checklist (thesis, invalidation, live quote, sizing questions) |
-| 4 | Tag skip reasons (0DTE crush, book conflict, second bite, …) |
-| 5 | Journal closes with an `edge_note` |
-| 6 | Optionally POST survivors to your agent webhook |
+| 1 | Turns a UW-style alert into one clean `SIGNAL` |
+| 2 | Skips the same contract if it already fired (~2 hours) |
+| 3 | Runs a checklist (thesis, invalidation, live quote, sizing questions) |
+| 4 | Tags skip reasons (0DTE crush, book conflict, second bite, …) |
+| 5 | Journals closes with an `edge_note` |
+| 6 | Sends clean alerts to your AI bot |
 
 Not a magic “buy every A print” bot.
 
@@ -60,9 +56,7 @@ Not a magic “buy every A print” bot.
 
 ## Plug-and-play agents
 
-```bash
-python3 scripts/wire_adapter.py <adapter> --url 'https://YOUR_WEBHOOK'
-```
+**Your bot picks the right one** when you send it this repo (see [BOT-SETUP.md](BOT-SETUP.md)).
 
 | Adapter | For |
 | --- | --- |
@@ -75,13 +69,12 @@ python3 scripts/wire_adapter.py <adapter> --url 'https://YOUR_WEBHOOK'
 | `lindy` | Lindy |
 | `windsurf` | Windsurf Cascade |
 | `perplexity` | Perplexity agent |
-| `discord` / `slack` | Team chat webhooks |
+| `discord` / `slack` | Team chat |
 | `n8n` / `make` / `zapier` | Automation relays |
 | `telegram` | Telegram via bridge |
-| `webhook` | Anything else with an HTTPS POST URL |
+| `webhook` | Anything else your bot can wake |
 
-Each prompt-pack adapter writes `adapters/ACTIVE_PROMPT.md` — paste that into the bot.  
-Details: `PLACE.md`.
+Bots: follow **BOT-SETUP.md**. Humans: ignore the adapter names — just paste the repo link to your bot.
 
 ---
 
@@ -90,7 +83,7 @@ Details: `PLACE.md`.
 - UW = raw unusual-flow ideas you won’t get from charts alone  
 - Checklist kills bad prints fast  
 - Close journal compounds learning  
-- Your agent gets clean wakes instead of the full firehose  
+- Your agent gets clean alerts instead of the full firehose  
 
 ---
 
@@ -100,7 +93,7 @@ Details: `PLACE.md`.
 - One-click Robinhood / IBKR auto-place clients  
 - Hosted trading for you  
 
-Agent wake **is** included. Broker place is still something you or your agent wire.
+Clean alerts to your bot **are** included. Live broker place is something your bot wires only after you say yes — and it stays off until then.
 
 ---
 
@@ -108,19 +101,20 @@ Agent wake **is** included. Broker place is still something you or your agent wi
 
 | Path | Job |
 | --- | --- |
+| `BOT-SETUP.md` | **Bots start here** — interview + wiring script |
 | `desk/` | Signal, ingest, dedupe, checklist, journal, notify |
 | `scripts/run_checklist.py` | Try the checklist |
-| `scripts/wire_adapter.py` | Connect your bot |
-| `scripts/notify_signal.py` | Checklist → POST to bot |
+| `scripts/wire_adapter.py` | Connect your bot (bot runs this) |
+| `scripts/notify_signal.py` | Checklist → alert your bot |
 | `scripts/append_closed_trade.py` | Log a closed trade |
-| `adapters/prompts/` | Paste-ready agent instructions |
+| `adapters/prompts/` | Judgment prompts for agents |
 | `samples/` | Example JSON |
 
 ---
 
 ## Paste-ready blurb
 
-> Free UW → desk pipe from @MarkMeyerBuilds. Unusual Whales is the idea feed; this repo is the judgment layer + plug-and-play wakes to your agent. Not a signal service.  
+> Free UW → desk pipe from @MarkMeyerBuilds. Unusual Whales is the idea feed; this repo is the judgment layer. Send the repo to your AI bot and say “set this up for me.” Not a signal service.  
 > Repo: https://github.com/meyer4t4-commits/uw-desk-pipe  
 > Get UW: https://refer.unusualwhales.com/mark-meyer
 

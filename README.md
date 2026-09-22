@@ -218,13 +218,13 @@ Wire UW alerts → your ingest → checklist output.
 
 Need UW for the pipe? Sign up through Mark’s partner link when live:
 
-> **Affiliate link:** `TBD — pending UW partner approval`  
+> **Affiliate link:** https://refer.unusualwhales.com/mark-meyer  
 > Apply / program: [https://partners.dub.co/unusual-whales](https://partners.dub.co/unusual-whales)  
 > Application: [https://partners.dub.co/unusual-whales/apply](https://partners.dub.co/unusual-whales/apply)
 
 Public program terms (as of research): **~10% per referred sale for 1 year**, referred users get **10% off for 3 months**, **60-day** click tracking, performance tiers. Payouts via Dub partner dashboard.
 
-Until Mark’s personal link is approved, use the official UW site and DM him on X if you want the partner code applied.
+Sign up here (10% off for 3 months for new users via partner): https://refer.unusualwhales.com/mark-meyer
 
 ### Hosted desk — waitlist ($29–99/mo)
 

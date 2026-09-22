@@ -250,7 +250,7 @@ One-time install: pipe + checklist wired to *your* UW + paper/live quoting pract
 
 ---
 
-## Radar-ready promo blurb
+## Paste-ready promo blurb
 
 > Free open-source UW→desk pipe from @MarkMeyerBuilds — not a signal service. Full function list: ingest, dedupe, checklist, live-quote gate, reject reasons, journals. Run ears on a Mac Mini to save cloud usage, or all-in on Grok Bot / any cloud agent for judgment. BYO UW keys. Hosted desk: DM HOSTED. Not financial advice.
 

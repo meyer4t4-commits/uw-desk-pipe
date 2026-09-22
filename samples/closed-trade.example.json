@@ -1,0 +1,20 @@
+{
+  "ts_close_et": "2026-01-01T15:30:00-05:00",
+  "ticker": "EXAMPLE",
+  "expiry": "2026-01-02",
+  "strike": 100,
+  "right": "C",
+  "qty": 1,
+  "avg_entry": 1.0,
+  "avg_exit": 1.5,
+  "realized_pnl": 50.0,
+  "result": "win",
+  "entry_source": "uw_a",
+  "setup_tags": [
+    "weekly",
+    "sample"
+  ],
+  "why_entered": "Sample only \u2014 replace with your thesis.",
+  "why_exited": "Sample only \u2014 replace with your exit reason.",
+  "edge_note": ""
+}

@@ -1,0 +1,13 @@
+{
+  "id": "sig_example_001",
+  "ticker": "QQQ",
+  "grade": "A",
+  "kind": "options",
+  "contract": {"expiry": "20260925", "strike": 735.0, "right": "C"},
+  "side": "BUY",
+  "premium_or_notional": 50000,
+  "thesis": "Example only — replace with your one-sentence thesis.",
+  "invalidation": "Example — mark/thesis break.",
+  "action_recommended": "story_only",
+  "source": "uw_example"
+}

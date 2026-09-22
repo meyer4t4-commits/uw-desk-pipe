@@ -1,12 +1,12 @@
 # UW → Desk Pipe (Free)
 
 **Free open-source judgment framework** for Unusual Whales flow → a human desk checklist.  
-Not a signal service. Optional live place via **Robinhood Agentic** after your rules. Not financial advice.
+Not a signal service. Optional live place on **Robinhood Agentic, IBKR, or any broker API you wire** — or alerts-only into Grok Bot / Hermes / Claw / your agent. Not financial advice.
 
 Built by [Mark Meyer](https://x.com/MarkMeyerBuilds) (@MarkMeyerBuilds).  
 
 > **What this is:** a pipe + judgment checklist so you can *differentiate* UW A/A+ noise into skip / story-only / size-and-consider.  
-> **What this is:** UW pipe + judgment questionnaire → optional live fire on **your** Robinhood Agentic account.
+> **What this is:** UW pipe + judgment questionnaire → **alerts to your agent** and/or **optional live place** on the broker you choose.
 > **What this is not:** Mark’s private edge tags, day-lock ping policy, or anyone else’s broker keys.
 
 ---
@@ -18,6 +18,19 @@ You need a UW account for the pipe. Use Mark’s partner link (easy, one click):
 **→ [https://refer.unusualwhales.com/mark-meyer](https://refer.unusualwhales.com/mark-meyer)**
 
 New users get **10% off for 3 months**. Mark earns partner commission when you subscribe through that link. Please use it — it’s the main way this free giveaway stays funded.
+
+---
+
+## Three ways to run it
+
+1. **Alerts → your agent (no broker required)**  
+   Mini/watcher forwards survivors to **Grok Bot, Hermes, Claw, Discord, Slack, or any webhook**. Your agent applies the questionnaire; you trade by hand or let that agent place elsewhere.
+2. **Live place on Robinhood Agentic**  
+   Checklist + live quote → place on your Agentic account when `LIVE_PLACE=true`.
+3. **Live place on IBKR (or any broker API)**  
+   Same checklist; swap the place adapter to IBKR Gateway / Client Portal / whatever you already use. Broker is a plugin, not the product.
+
+Mini stays **ears only** in all three — no write keys on the always-on box.
 
 ---
 
@@ -40,7 +53,8 @@ This repo gives you the **pipe + the questions**. You bring the judgment (and yo
 | --- | --- |
 | **Unusual Whales account** | Required. Sign up via partner link: **[https://refer.unusualwhales.com/mark-meyer](https://refer.unusualwhales.com/mark-meyer)** (10% off 3 months) |
 | **UW API token** (BYO) | Stored only in your local env / secrets — never committed |
-| **Optional: Robinhood Agentic** | BYO account + API/connector. After checklist + live quote, you can enable live place on Agentic |
+| **Optional: broker** | Robinhood Agentic, IBKR, or any API you wire — live place after checklist + live quote |
+| **Optional: agent inbox** | No Agentic account? Send wakes to Grok Bot / Hermes / Claw / Discord / webhook — alerts only |
 | **Python 3.10+** | Local scripts / helpers |
 | **Brain** | Soft prefs are guidance, not FAIL religion |
 
@@ -77,7 +91,8 @@ Aligned with desk docs you’ll see named in the private playbook (`AGENTIC-DESK
 | **Trade journal** | `SIGNAL` / `ENTRY` / `COMPLETE` event log (noisy path). |
 | **Closed-trades W/L journal** | One row per closed ticket + required empty `edge_note` you fill so the desk compounds. |
 | **RTH options window** | Options wakes/places intended for weekday regular hours only (when you can actually trade options). |
-| **Live place (optional)** | After hard gates + your questionnaire, place on Robinhood Agentic (BYO). Default off until you enable it. |
+| **Live place (optional)** | After hard gates + questionnaire, place on **your** broker (RH Agentic, IBKR, …). Default off. |
+| **Agent alerts (optional)** | Forward survivors to Grok Bot / Hermes / Claw / any webhook — no broker required |
 | **Alert-only vs live** | Default: ears + checklist + journal. Flip live place on when *your* rules pass and RH Agentic is wired. |
 | **Hosted / cloud judgment (paid optional)** | Always-on desk that runs the checklist for you and wakes you on fills / material marks — see waitlist below. |
 
@@ -112,7 +127,8 @@ Point survivors at **whatever cloud agent you already pay for**. That agent does
 | Judgment against the checklist | Sizing questions, reject reasons, “size or pass?” |
 | Live broker quotes (if you wire a connector) | Quote gate before any real size talk |
 | Material pings | Fills, big mark moves — not every skip |
-| Optional live place (your RH Agentic, your risk) | Enable after questionnaire + live quote; Mini stays ears-only |
+| Optional live place (your broker, your risk) | RH Agentic / IBKR / other — enable after questionnaire + live quote |
+| Or alerts-only to your agent | Grok Bot, Hermes, Claw, Discord, SMS — no place keys needed |
 
 **Rule:** Cloud gets **strategy + connectors**. Local gets **always-on grind**. Don’t put “one general chat does everything” in the middle — that’s where quota burns.
 
@@ -219,7 +235,7 @@ python3 -m desk.checklist --help
 ```
 
 Wire UW alerts → your ingest → checklist output.  
-**You** set the questionnaire/rules. Alert-only until you wire Robinhood Agentic and flip live place on — then it can fire when rules + live quote pass. See `PLACE.md`.
+**You** set the questionnaire/rules. Then either (1) forward alerts to Grok Bot / Hermes / Claw, or (2) wire a broker (RH Agentic, IBKR, …) and flip live place on. See `PLACE.md`.
 
 ---
 
@@ -266,7 +282,7 @@ One-time install: pipe + checklist wired to *your* UW + paper/live quoting pract
 - **No guarantees.** Markets risk capital. You can lose money.
 - **BYO keys / accounts.** You own Unusual Whales, broker, and cloud credentials. Never paste secrets into issues or PRs.
 - **No liability.** Authors and promoters are not responsible for trades, misses, outages, or third-party API changes.
-- **Not a broker, RIA, or CTA.** Live place is optional and uses **your** Robinhood Agentic credentials. You own every fill. Hosted / setup offerings (if any) are optional ops help — still your risk.
+- **Not a broker, RIA, or CTA.** Live place is optional and uses **your** broker credentials (RH Agentic, IBKR, or other). Alerts-only needs no broker. You own every fill. Hosted / setup help is still your risk.
 - Past patterns in any example journal **do not** predict future results.
 
 ---

@@ -1,40 +1,55 @@
-# Live place (optional) — Robinhood Agentic
+# Place & alerts — broker-agnostic
 
-Default mode is **alert-only** (ingest → dedupe → checklist → journal).  
-You can turn on **live place** once the questionnaire/rules are yours and Robinhood Agentic is wired.
+The desk core is broker-blind: **ingest → dedupe → checklist → journal**.  
+Where fills happen (or don’t) is your choice.
 
-## Flow
+## Path A — Alerts only (no Agentic / no broker)
 
-1. UW wake → normalize `SIGNAL`
-2. Dedupe contract key
-3. Run **checklist / questionnaire** (thesis, invalidation, soft band, reject tags)
-4. **Live option quote** (usable bid/ask) — no quote → `story_only`, do not place
-5. If rules pass and live place is **enabled** → place on **your** Robinhood Agentic account only
-6. Journal `ENTRY` on fill; `COMPLETE` + `edge_note` on close
+Best if you don’t have Robinhood Agentic or don’t want auto-place yet.
 
-## Rules you set (examples)
-
-- Soft premium band (e.g. ~$150–400)
-- Max open tickets / concentration
-- No 0DTE stack on an open winner
-- No book-conflict puts vs long calls (or the reverse)
-- RTH-only options
-- Live quote required
-
-## Safety
-
-- Mini / local watcher = **ears only** — do not put broker write keys on the always-on box
-- Cloud bot / place path holds the connector and only fires after checklist
-- Never commit tokens, account numbers, or cookies to git
-- Past results do not predict future results — you can lose money
-
-## Enable
-
-Set in `.env` (names illustrative — wire to your connector):
+1. UW wake → checklist
+2. Survivors POST to `NOTIFY_URL` (Grok Bot webhook, Hermes, Claw, Discord, Slack, ntfy, …)
+3. Your agent asks the questionnaire / sizes / you click place in whatever broker UI you use
 
 ```
+NOTIFY_URL=https://your-agent-or-discord-webhook
 LIVE_PLACE=false
-ROBINHOOD_AGENTIC_ACCOUNT=your_agentic_account
 ```
 
-Flip `LIVE_PLACE=true` only after you trust your questionnaire.
+## Path B — Robinhood Agentic live place
+
+1. Checklist + live quote pass
+2. `LIVE_PLACE=true`
+3. Place on **your** Robinhood Agentic account only
+
+```
+LIVE_PLACE=true
+BROKER=robinhood_agentic
+# ROBINHOOD_AGENTIC_ACCOUNT=
+```
+
+## Path C — IBKR (or any broker)
+
+Same as B, different adapter:
+
+```
+LIVE_PLACE=true
+BROKER=ibkr
+# IBKR_HOST=127.0.0.1
+# IBKR_PORT=7497
+# IBKR_CLIENT_ID=1
+```
+
+Wire Client Portal / TWS / Gateway yourself. This repo ships the **checklist contract**, not a full IBKR SDK — bring the client you trust.
+
+## Shared rules
+
+- Questionnaire / reject tags are identical on every path
+- Live quote before options place (whichever broker)
+- Mini / local watcher = **ears only** — never broker write keys on the always-on box
+- Never commit tokens or account numbers
+
+## Enable order
+
+1. Run alerts-only until the questionnaire feels right  
+2. Then either keep alerts→agent, or flip `LIVE_PLACE` on the broker you actually use  

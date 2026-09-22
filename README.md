@@ -4,7 +4,6 @@
 Not a signal service. Not auto-trading. Not financial advice.
 
 Built by [Mark Meyer](https://x.com/MarkMeyerBuilds) (@MarkMeyerBuilds).  
-Promoted via Grok Bot Radar as a free top-of-funnel giveaway.
 
 > **What this is:** a pipe + judgment checklist so you can *differentiate* UW A/A+ noise into skip / story-only / size-and-consider.  
 > **What this is not:** Mark’s live Agentic place path, broker credentials, or his private edge tags.
@@ -255,7 +254,7 @@ One-time install: pipe + checklist wired to *your* UW + paper/live quoting pract
 
 > Free open-source UW→desk pipe from @MarkMeyerBuilds — not a signal service. Full function list: ingest, dedupe, checklist, live-quote gate, reject reasons, journals. Run ears on a Mac Mini to save cloud usage, or all-in on Grok Bot / any cloud agent for judgment. BYO UW keys. Hosted desk: DM HOSTED. Not financial advice.
 
-*(2–3 sentences — paste into Grok Bot Radar / Mark’s thread.)*
+*(2–3 sentences — paste into X / threads.)*
 
 ---
 

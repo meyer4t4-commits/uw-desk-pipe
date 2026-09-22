@@ -7,130 +7,132 @@ Not financial advice. You can lose money trading options.
 
 ---
 
+## Do this next (in order)
+
+1. **Get Unusual Whales** (required — this is the idea feed)  
+   https://refer.unusualwhales.com/mark-meyer  
+   New users: **10% off for 3 months**. Please use that link.
+
+2. **Clone and try the checklist**
+   ```bash
+   git clone https://github.com/meyer4t4-commits/uw-desk-pipe.git
+   cd uw-desk-pipe
+   cp .env.example .env
+   python3 scripts/run_checklist.py samples/signal.example.json --skip-dedupe
+   ```
+
+3. **Plug in your agent** (one command)
+   ```bash
+   python3 scripts/wire_adapter.py grokbot --url 'https://YOUR_INBOUND_WEBHOOK'
+   # then paste adapters/ACTIVE_PROMPT.md into that bot
+   python3 scripts/notify_signal.py samples/signal.example.json --dry-run
+   ```
+
+4. **Optional:** join the hosted desk waitlist  
+   https://github.com/meyer4t4-commits/uw-desk-pipe/issues/new?template=hosted-desk-waitlist.yml
+
+That’s the whole onboarding path.
+
+---
+
 ## Why Unusual Whales
 
 Charts alone don’t show when big, unusual options flow hits.  
-**Unusual Whales** surfaces graded unusual options activity (the “idea feed”).
+UW surfaces that graded flow. **Without UW, this desk has nothing to judge.**
 
-This repo does **not** replace UW. It assumes you have UW (or a compatible alert feed).  
-Without that feed, there’s nothing for the desk to judge.
-
-**Get UW (partner link — please use this):**  
-https://refer.unusualwhales.com/mark-meyer  
-
-New users get **10% off for 3 months**. That’s how this free project stays funded.
+This repo does not replace UW. It sits on top of it.
 
 ---
 
-## What this repo actually does
+## What it does (included)
 
-Most people drown in A/A+ alerts. Volume isn’t the edge.  
-**The edge is deciding which prints to ignore vs take seriously.**
+Most A/A+ alerts should be ignored. The edge is **which ones to skip vs take seriously**.
 
-This package gives you:
+| Step | What happens |
+| --- | --- |
+| 1 | Normalize a UW-style alert into one `SIGNAL` |
+| 2 | Dedupe the same contract (~2 hours) |
+| 3 | Run a checklist (thesis, invalidation, live quote, sizing questions) |
+| 4 | Tag skip reasons (0DTE crush, book conflict, second bite, …) |
+| 5 | Journal closes with an `edge_note` |
+| 6 | Optionally POST survivors to your agent webhook |
 
-1. **Normalize** a UW-style alert into one standard `SIGNAL` object  
-2. **Dedupe** the same contract so re-churn doesn’t spam you  
-3. **Run a checklist** — hard questions (thesis, invalidation, live quote, journal) plus soft sizing prefs  
-4. **Tag skip reasons** — e.g. 0DTE crush, book conflict, second bite, no live quote  
-5. **Journal closes** — one row per closed trade with an `edge_note` so you learn what worked
-
-That’s it. Clear judgment on top of UW. Not a magic signal bot.
-
----
-
-## What’s in the box (code)
-
-| Piece | Path | Job |
-| --- | --- | --- |
-| Signal model | `desk/models.py` | Standard shape for an alert |
-| Ingest | `desk/ingest.py` | Turn raw JSON into a `SIGNAL` |
-| Dedupe | `desk/dedupe.py` | Same contract suppressed for ~2 hours |
-| Checklist | `desk/checklist.py` | Questions + skip/story recommendation |
-| Journal helper | `desk/journal.py` | Closed-trade row shape + append |
-| CLI | `scripts/run_checklist.py` | Run checklist on a sample/alert JSON |
-| Journal CLI | `scripts/append_closed_trade.py` | Append a closed trade to JSONL |
-| Samples | `samples/` | Example signal + closed-trade rows |
+Not a magic “buy every A print” bot.
 
 ---
-
-## Quick start
-
-```bash
-git clone https://github.com/meyer4t4-commits/uw-desk-pipe.git
-cd uw-desk-pipe
-cp .env.example .env
-# put your UW token in .env when you wire a live feed
-
-python3 scripts/run_checklist.py samples/signal.example.json --skip-dedupe
-python3 scripts/run_checklist.py samples/signal.example.json --live-quote --skip-dedupe
-```
-
-Walk the printed questions before you size anything.
-
----
-
 
 ## Plug-and-play agents
 
-Point the desk at **your** bot with one command (Grok Bot, Hermes, OpenClaw, Claw, Discord, Slack, or any webhook):
-
 ```bash
-python3 scripts/wire_adapter.py grokbot --url 'https://YOUR_INBOUND_WEBHOOK'
-# copies prompt pack → adapters/ACTIVE_PROMPT.md — paste into the bot
-python3 scripts/notify_signal.py samples/signal.example.json --dry-run
+python3 scripts/wire_adapter.py <adapter> --url 'https://YOUR_WEBHOOK'
 ```
 
-After an alert is checklisted, survivors POST to `NOTIFY_URL`. Your agent does judgment / optional place with its own tools.
+| Adapter | For |
+| --- | --- |
+| `grokbot` | Grok Bot |
+| `hermes` | Hermes / local gateway |
+| `openclaw` / `claw` | OpenClaw family |
+| `cursor` | Cursor agent |
+| `claude` | Claude / Claude Code |
+| `chatgpt` | ChatGPT / custom GPT |
+| `lindy` | Lindy |
+| `windsurf` | Windsurf Cascade |
+| `perplexity` | Perplexity agent |
+| `discord` / `slack` | Team chat webhooks |
+| `n8n` / `make` / `zapier` | Automation relays |
+| `telegram` | Telegram via bridge |
+| `webhook` | Anything else with an HTTPS POST URL |
 
-Supported adapters: `grokbot` · `hermes` · `openclaw` · `claw` · `webhook` · `discord` · `slack`  
-Details: `PLACE.md` and `adapters/prompts/`.
-
-## Why this is effective
-
-- **UW gives the raw ideas.** Without them you’re late or blind to unusual flow.  
-- **Most graded alerts should die.** The checklist exists to kill bad ones fast (no quote, book conflict, re-churn, lottery sizing).  
-- **A close journal compounds.** `edge_note` on every exit beats “I think I remember what worked.”  
-- **Same process every time.** Emotion and FOMO get a written gate, not a vibe.
-
----
-
-## What this is *not* (yet)
-
-These are **not** shipped as ready-made connectors in this repo:
-
-- A full always-on UW watcher binary  
-- One-click Robinhood / IBKR auto-trading  
-- A hosted bot that places for you  
-- Finished Robinhood/IBKR place clients  
-
-**Agent wake is plug-and-play** (see above). Broker auto-place is still something you (or your agent) wire. See `PLACE.md`.
+Each prompt-pack adapter writes `adapters/ACTIVE_PROMPT.md` — paste that into the bot.  
+Details: `PLACE.md`.
 
 ---
 
-## Hosted desk (optional, separate)
+## Why this works
 
-If you want someone to run a desk like this for you later:
+- UW = raw unusual-flow ideas you won’t get from charts alone  
+- Checklist kills bad prints fast  
+- Close journal compounds learning  
+- Your agent gets clean wakes instead of the full firehose  
 
-**Join waitlist:**  
-https://github.com/meyer4t4-commits/uw-desk-pipe/issues/new?template=hosted-desk-waitlist.yml  
+---
 
-Founding target ~$49/mo. Free repo stays free.
+## Not included (yet)
+
+- Always-on UW watcher binary  
+- One-click Robinhood / IBKR auto-place clients  
+- Hosted trading for you (waitlist above)  
+
+Agent wake **is** included. Broker place is still something you or your agent wire.
+
+---
+
+## Code map
+
+| Path | Job |
+| --- | --- |
+| `desk/` | Signal, ingest, dedupe, checklist, journal, notify |
+| `scripts/run_checklist.py` | Try the checklist |
+| `scripts/wire_adapter.py` | Connect your bot |
+| `scripts/notify_signal.py` | Checklist → POST to bot |
+| `scripts/append_closed_trade.py` | Log a closed trade |
+| `adapters/prompts/` | Paste-ready agent instructions |
+| `samples/` | Example JSON |
 
 ---
 
 ## Paste-ready blurb
 
-> Free UW → desk pipe from @MarkMeyerBuilds. Unusual Whales is the idea feed; this repo is the judgment layer (normalize, dedupe, checklist, skip reasons, close journal). Not a signal service. BYO UW key.  
+> Free UW → desk pipe from @MarkMeyerBuilds. Unusual Whales is the idea feed; this repo is the judgment layer + plug-and-play wakes to your agent. Not a signal service.  
 > Repo: https://github.com/meyer4t4-commits/uw-desk-pipe  
 > Get UW: https://refer.unusualwhales.com/mark-meyer  
-> Hosted waitlist: https://github.com/meyer4t4-commits/uw-desk-pipe/issues/new?template=hosted-desk-waitlist.yml
+> Waitlist: https://github.com/meyer4t4-commits/uw-desk-pipe/issues/new?template=hosted-desk-waitlist.yml
 
 ---
 
 ## Legal
 
-Not financial advice. Not a broker, RIA, or CTA. Past results don’t predict future results. You bring your own UW / broker keys and you own every decision and fill.
+Not financial advice. Not a broker, RIA, or CTA. Past results don’t predict future results. You own every decision and fill.
 
 ## License
 

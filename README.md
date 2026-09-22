@@ -28,9 +28,6 @@ Not financial advice. You can lose money trading options.
    python3 scripts/notify_signal.py samples/signal.example.json --dry-run
    ```
 
-4. **Optional:** join the hosted desk waitlist  
-   https://github.com/meyer4t4-commits/uw-desk-pipe/issues/new?template=hosted-desk-waitlist.yml
-
 That’s the whole onboarding path.
 
 ---
@@ -101,7 +98,7 @@ Details: `PLACE.md`.
 
 - Always-on UW watcher binary  
 - One-click Robinhood / IBKR auto-place clients  
-- Hosted trading for you (waitlist above)  
+- Hosted trading for you  
 
 Agent wake **is** included. Broker place is still something you or your agent wire.
 
@@ -125,8 +122,7 @@ Agent wake **is** included. Broker place is still something you or your agent wi
 
 > Free UW → desk pipe from @MarkMeyerBuilds. Unusual Whales is the idea feed; this repo is the judgment layer + plug-and-play wakes to your agent. Not a signal service.  
 > Repo: https://github.com/meyer4t4-commits/uw-desk-pipe  
-> Get UW: https://refer.unusualwhales.com/mark-meyer  
-> Waitlist: https://github.com/meyer4t4-commits/uw-desk-pipe/issues/new?template=hosted-desk-waitlist.yml
+> Get UW: https://refer.unusualwhales.com/mark-meyer
 
 ---
 

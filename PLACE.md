@@ -1,29 +1,25 @@
-# Optional: alerts and live place (you wire these)
+# Plug-and-play agents + optional live place
 
-The **included** code stops at: ingest → dedupe → checklist → journal.
+## Agents (included)
 
-If you want more, you add it:
+One command wires your bot:
 
-## Alerts to an agent (common)
+```bash
+python3 scripts/wire_adapter.py grokbot --url 'https://YOUR_WAKE_OR_WEBHOOK'
+# also: hermes | openclaw | claw | webhook | discord | slack
+```
 
-After checklist, POST survivors to whatever you already use:
+That writes `NOTIFY_URL` into `.env` and drops a prompt pack at `adapters/ACTIVE_PROMPT.md` — paste that into the bot.
 
-- Grok Bot webhook / Hermes / Claw  
-- Discord / Slack / ntfy  
+Test:
 
-No broker required. Your agent (or you) decides whether to trade.
+```bash
+python3 scripts/notify_signal.py samples/signal.example.json --dry-run
+python3 scripts/notify_signal.py samples/signal.example.json
+```
 
-Set `NOTIFY_URL` in `.env` when you build that forwarder.
+Survivors after checklist POST as JSON (`type: uw_desk_signal`). Discord/Slack use `--format discord|slack`.
 
-## Live place on a broker (advanced)
+## Brokers (not plug-and-play yet)
 
-Only after checklist + a **live** options quote:
-
-- Robinhood Agentic, or  
-- IBKR, or  
-- any API you trust  
-
-Keep `LIVE_PLACE=false` until your rules feel solid.  
-Don’t put broker write keys on an always-on Mini doing the watch loop — ears only there.
-
-This repo does **not** ship a finished RH/IBKR place client. Bring your own.
+Robinhood Agentic / IBKR live place is still **you wire it**. Keep `LIVE_PLACE=false` until then. Mini/watchers should stay ears-only (no write keys).

@@ -70,6 +70,22 @@ Walk the printed questions before you size anything.
 
 ---
 
+
+## Plug-and-play agents
+
+Point the desk at **your** bot with one command (Grok Bot, Hermes, OpenClaw, Claw, Discord, Slack, or any webhook):
+
+```bash
+python3 scripts/wire_adapter.py grokbot --url 'https://YOUR_INBOUND_WEBHOOK'
+# copies prompt pack → adapters/ACTIVE_PROMPT.md — paste into the bot
+python3 scripts/notify_signal.py samples/signal.example.json --dry-run
+```
+
+After an alert is checklisted, survivors POST to `NOTIFY_URL`. Your agent does judgment / optional place with its own tools.
+
+Supported adapters: `grokbot` · `hermes` · `openclaw` · `claw` · `webhook` · `discord` · `slack`  
+Details: `PLACE.md` and `adapters/prompts/`.
+
 ## Why this is effective
 
 - **UW gives the raw ideas.** Without them you’re late or blind to unusual flow.  
@@ -86,8 +102,9 @@ These are **not** shipped as ready-made connectors in this repo:
 - A full always-on UW watcher binary  
 - One-click Robinhood / IBKR auto-trading  
 - A hosted bot that places for you  
+- Finished Robinhood/IBKR place clients  
 
-You (or your agent — Grok Bot, Hermes, Claw, etc.) can **wire** alerts and brokers on top of this checklist. See `PLACE.md` for optional patterns. Don’t expect those adapters to be plug-and-play here today.
+**Agent wake is plug-and-play** (see above). Broker auto-place is still something you (or your agent) wire. See `PLACE.md`.
 
 ---
 

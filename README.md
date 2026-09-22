@@ -253,12 +253,13 @@ Public program terms (as of research): **~10% per referred sale for 1 year**, re
 
 Sign up here (10% off for 3 months for new users via partner): https://refer.unusualwhales.com/mark-meyer
 
-### Hosted desk — waitlist ($29–99/mo)
+### Hosted desk — waitlist (~$49/mo founding)
 
-Always-on UW → judgment desk, filtered wakes, optional assisted ops. Soft band + live-quote gate baked in. **No secrets in the free repo.**
+**Join the waitlist (real form):** [https://github.com/meyer4t4-commits/uw-desk-pipe/issues/new?template=hosted-desk-waitlist.yml](https://github.com/meyer4t4-commits/uw-desk-pipe/issues/new?template=hosted-desk-waitlist.yml)
 
-> **Waitlist:** [https://x.com/MarkMeyerBuilds](https://x.com/MarkMeyerBuilds) — reply or DM **`HOSTED`**  
-> Price band at launch: **$29–99/mo** (tier TBD). Spots limited while the desk stays judgment-first.
+Always-on UW → judgment desk, filtered wakes, optional assisted place on your broker. Soft band + live-quote gate baked in. Free repo stays free.
+
+Founding target **~$49/mo**. Setup / install still via DM **SETUP** on [X @MarkMeyerBuilds](https://x.com/MarkMeyerBuilds) ($297 loom / $497 hands-on).
 
 ### Setup / install offer ($197–497, optional)
 

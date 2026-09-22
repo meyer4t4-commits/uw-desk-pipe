@@ -1,55 +1,29 @@
-# Place & alerts — broker-agnostic
+# Optional: alerts and live place (you wire these)
 
-The desk core is broker-blind: **ingest → dedupe → checklist → journal**.  
-Where fills happen (or don’t) is your choice.
+The **included** code stops at: ingest → dedupe → checklist → journal.
 
-## Path A — Alerts only (no Agentic / no broker)
+If you want more, you add it:
 
-Best if you don’t have Robinhood Agentic or don’t want auto-place yet.
+## Alerts to an agent (common)
 
-1. UW wake → checklist
-2. Survivors POST to `NOTIFY_URL` (Grok Bot webhook, Hermes, Claw, Discord, Slack, ntfy, …)
-3. Your agent asks the questionnaire / sizes / you click place in whatever broker UI you use
+After checklist, POST survivors to whatever you already use:
 
-```
-NOTIFY_URL=https://your-agent-or-discord-webhook
-LIVE_PLACE=false
-```
+- Grok Bot webhook / Hermes / Claw  
+- Discord / Slack / ntfy  
 
-## Path B — Robinhood Agentic live place
+No broker required. Your agent (or you) decides whether to trade.
 
-1. Checklist + live quote pass
-2. `LIVE_PLACE=true`
-3. Place on **your** Robinhood Agentic account only
+Set `NOTIFY_URL` in `.env` when you build that forwarder.
 
-```
-LIVE_PLACE=true
-BROKER=robinhood_agentic
-# ROBINHOOD_AGENTIC_ACCOUNT=
-```
+## Live place on a broker (advanced)
 
-## Path C — IBKR (or any broker)
+Only after checklist + a **live** options quote:
 
-Same as B, different adapter:
+- Robinhood Agentic, or  
+- IBKR, or  
+- any API you trust  
 
-```
-LIVE_PLACE=true
-BROKER=ibkr
-# IBKR_HOST=127.0.0.1
-# IBKR_PORT=7497
-# IBKR_CLIENT_ID=1
-```
+Keep `LIVE_PLACE=false` until your rules feel solid.  
+Don’t put broker write keys on an always-on Mini doing the watch loop — ears only there.
 
-Wire Client Portal / TWS / Gateway yourself. This repo ships the **checklist contract**, not a full IBKR SDK — bring the client you trust.
-
-## Shared rules
-
-- Questionnaire / reject tags are identical on every path
-- Live quote before options place (whichever broker)
-- Mini / local watcher = **ears only** — never broker write keys on the always-on box
-- Never commit tokens or account numbers
-
-## Enable order
-
-1. Run alerts-only until the questionnaire feels right  
-2. Then either keep alerts→agent, or flip `LIVE_PLACE` on the broker you actually use  
+This repo does **not** ship a finished RH/IBKR place client. Bring your own.
